@@ -7,6 +7,7 @@ import "./style.css";
 import App from "./App.vue";
 import { createPinia } from "pinia";
 import { createWebHistory, createRouter } from "vue-router";
+import { useGlobalStore } from "./stores/global.js";
 
 //components
 import RegisterLoginPage from "./pages/RegisterLoginPage.vue";
@@ -51,13 +52,34 @@ const router = createRouter({
       path: "/admin",
       name: "Admin",
       component: AdminDashboardPage,
+      meta: { requiresAdmin: true },
     },
     {
       path: "/admin/addMovie",
       name: "AddMovie",
       component: AdminAddFormPage,
+      meta: { requiresAdmin: true },
     },
   ],
+});
+
+//protect admin routes
+router.beforeEach(async (to) => {
+  const store = useGlobalStore();
+
+  // Restore the user after a refresh
+  if (store.user.token && store.user.isAdmin == null) {
+    try {
+      await store.getUserDetails(store.user.token);
+    } catch {
+      localStorage.removeItem("token"); // token expired or invalid
+      await store.getUserDetails(null);
+    }
+  }
+
+  if (to.meta.requiresAdmin && !store.user.isAdmin) {
+    return store.user.token ? "/movies" : "/login";
+  }
 });
 
 const app = createApp(App);
