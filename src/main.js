@@ -60,6 +60,10 @@ const router = createRouter({
       component: AdminAddFormPage,
       meta: { requiresAdmin: true },
     },
+    {
+      path: "/:pathMatch(.*)*",
+      component: MoviesCatalogPage,
+    },
   ],
 });
 
