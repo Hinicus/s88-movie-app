@@ -13,6 +13,8 @@ import RegisterLoginPage from "./pages/RegisterLoginPage.vue";
 import LogoutPage from "./pages/LogoutPage.vue";
 import MoviePage from "./pages/MoviePage.vue";
 import MoviesCatalogPage from "./pages/MoviesCatalogPage.vue";
+import AdminDashboardPage from "./pages/AdminDashboardPage.vue";
+import AdminAddFormPage from "./pages/AdminAddFormPage.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -43,6 +45,17 @@ const router = createRouter({
       path: "/movies/:id",
       name: "MoviePage",
       component: MoviePage,
+    },
+    //admin routes
+    {
+      path: "/admin",
+      name: "Admin",
+      component: AdminDashboardPage,
+    },
+    {
+      path: "/admin/addMovie",
+      name: "AddMovie",
+      component: AdminAddFormPage,
     },
   ],
 });

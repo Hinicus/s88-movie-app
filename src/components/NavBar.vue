@@ -27,6 +27,16 @@
             <router-link
               class="nav-link active"
               aria-current="page"
+              to="/admin"
+              v-if="user.email && user.isAdmin">
+              <i class="bi bi-patch-check-fill me-1"></i>
+              Admin Dashboard</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="nav-link active"
+              aria-current="page"
               to="/register"
               v-if="!user.email">
               <i class="bi bi-clipboard me-1"></i>

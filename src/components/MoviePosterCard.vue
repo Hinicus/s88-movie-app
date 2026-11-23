@@ -7,7 +7,7 @@
         alt="Movie poster" />
       <div class="card-body">
         <h5 class="card-title">{{ movie.title }}</h5>
-        <p class="card-text">{{ movie.description }}</p>
+        <p class="card-text text-truncate">{{ movie.description }}</p>
         <router-link :to="`/movies/${movie._id}`" class="btn btn-danger">
           View Movie
         </router-link>
